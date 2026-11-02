@@ -68,25 +68,82 @@ JOIN은 여러 테이블을 연결해서 분석 질문에 답하기 위해 반�
 ## 01.
 
 ```
-개념 이름:
-개념 설명:
-예시 쿼리:
+개념 이름: JOIN
+개념 설명: 두 개 이상의 테이블을 공통된 열을 기준으로 연결하여 데이터를 조회하는 기능.
+예시 쿼리: SELECT *
+FROM customers c
+JOIN orders o
+ON c.id = o.customer_id;
 ```
 
 ## 02.
 
 ```
-개념 이름:
-개념 설명:
+개념 이름:INNER JOIN
+개념 설명: 두 테이블에서 JOIN 조건이 일치하는 데이터만 조회. 일반적인 JOIN과 동일함.
+예시 쿼리: SELECT *
+FROM customers c
+INNER JOIN orders o
+ON c.id = o.customer_id;
+```
+
+##  03.
+
+```
+개념 이름: LEFT JOIN
+개념 설명: 왼쪽 테이블의 모든 데이터를 유지하고, 오른쪽 테이블에서 일치하는 데이터만 연결. 일치하지 않으면 NULL로 표시됨.
+예시 쿼리: 
+SELECT *
+FROM customers c
+LEFT JOIN orders o
+ON c.id = o.customer_id;
+
+## 04. 
+
+개념 이름: JOIN key
+개념 설명: 두 테이블을 연결하는 기준 열. 주로 기본키(PK)와 외래키(FK)를 사용함.
 예시 쿼리:
-```
+SELECT *
+FROM customers c
+JOIN orders o
+ON c.id = o.customer_id;
 
-## (선택) 03.
+## 05.
 
-```
-개념 이름:
-개념 설명:
-헷갈린 점:
+개념 이름: alias (별칭)
+
+개념 설명: 테이블이나 열에 짧은 이름을 붙여 SQL을 간결하게 작성하는 기능.
+
+예시 쿼리:
+SELECT c.name, o.order_date
+FROM customers AS c
+JOIN orders AS o
+ON c.id = o.customer_id;
+
+## 06. 
+
+개념 이름: NULL
+
+개념 설명: 값이 없거나 알려지지 않은 상태. 숫자 0이나 빈 문자열과는 다름.
+
+예시 쿼리:
+SELECT *
+FROM customers
+WHERE phone IS NULL;
+
+## 07. 
+
+개념 이름: 다중 JOIN (Multiple JOIN)
+
+개념 설명: 세 개 이상의 테이블을 여러 JOIN으로 연결하여 데이터를 조회하는 방법.
+
+예시 쿼리:
+SELECT c.name, o.order_id, p.product_name
+FROM customers c
+JOIN orders o
+ON c.id = o.customer_id
+JOIN products p
+ON o.product_id = p.id;
 ```
 
 ---
@@ -95,9 +152,12 @@ JOIN은 여러 테이블을 연결해서 분석 질문에 답하기 위해 반�
 
 아래 중 하나 이상을 첨부해주세요.
 
+
 - 강의 수강 화면 캡처
 - JOIN 문제 풀이 정답 화면 캡처
 - JOIN 전후 결과 row 수를 비교한 캡처 또는 메모
+
+![alt text](image-34.png)
 
 ---
 
@@ -112,12 +172,12 @@ JOIN은 여러 테이블을 연결해서 분석 질문에 답하기 위해 반�
 풀이 과정:
 
 ```
-- 사용한 테이블:
-- JOIN key:
-- 날짜를 출력한 형식:
+- 사용한 테이블: BOOK, AUTHOR
+- JOIN key: BOOK.AUTHOR_ID = AUTHOR.AUTHOR_ID
+- 날짜를 출력한 형식: DATE_FORMAT(PUBLISHED_DATE, '%Y-%m-%d') → 2021-02-05 형식
 ```
 
-<!-- 정답을 맞추게 되면, 정답입니다. 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. -->
+![alt text](image-35.png)
 
 ## 🧩 문제 2
 
@@ -126,12 +186,14 @@ JOIN은 여러 테이블을 연결해서 분석 질문에 답하기 위해 반�
 풀이 과정:
 
 ```
-- 연결한 테이블:
-- JOIN key:
-- 집계한 값:
+- 연결한 테이블: PRODUCT, OFFLINE_SALE
+- JOIN key: 
+ ON P.PRODUCT_ID = O.PRODUCT_ID
+- 집계한 값: 
+ 상품코드별 총 매출액 SUM(P.PRICE * O.SALES_AMOUNT) AS SALES
 ```
 
-<!-- 정답을 맞추게 되면, 정답입니다. 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. -->
+![alt text](image-36.png)
 
 ## 🧩 문제 3
 
@@ -140,12 +202,12 @@ JOIN은 여러 테이블을 연결해서 분석 질문에 답하기 위해 반�
 풀이 과정:
 
 ```
-- 기준이 되는 왼쪽 테이블:
-- LEFT JOIN이 필요한 이유:
-- NULL이 발생하는 경우:
+- 기준이 되는 왼쪽 테이블: FROM 뒤에 오는 테이블로, 모든 행을 유지하려는 테이블
+- LEFT JOIN이 필요한 이유: 오른쪽 테이블에 일치하는 데이터가 없어도 왼쪽 테이블의 모든 데이터를 조회하기 위해
+- NULL이 발생하는 경우: ON 조건에 일치하는 오른쪽 테이블의 데이터가 없을 때, 오른쪽 테이블의 컬럼에 NULL 발생
 ```
 
-<!-- 정답을 맞추게 되면, 정답입니다. 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. -->
+![alt text](image-37.png)
 
 ## 🧩 문제 4
 
@@ -154,13 +216,12 @@ JOIN은 여러 테이블을 연결해서 분석 질문에 답하기 위해 반�
 풀이 과정:
 
 ```
-- 사용한 테이블:
-- JOIN key:
-- 비교한 날짜 컬럼:
-- 정렬 기준:
-```
+- 사용한 테이블: ANIMAL_INS, ANIMAL_OUTS
+- JOIN key: ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+- 비교한 날짜 컬럼: I.DATETIME > O.DATETIME (보호 시작일 > 입양일)
+- 정렬 기준: I.DATETIME ASC (보호 시작일 오름차순)
 
-<!-- 정답을 맞추게 되면, 정답입니다. 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. -->
+![alt text](image-38.png)
 
 ---
 
