@@ -156,6 +156,7 @@ ORDER BY ANIMAL_ID;
 - SQL 실행 결과 화면 캡처
 - 전체 개념 정리 노트 캡처
 
+![alt text](image-41.png)
 ---
 
 # 3️⃣ 복습 문제
